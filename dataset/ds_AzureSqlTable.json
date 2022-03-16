@@ -1,0 +1,26 @@
+{
+	"name": "ds_AzureSqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lnk_AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"dst_table_name": {
+				"type": "String",
+				"defaultValue": "Emp"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().dst_table_name",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

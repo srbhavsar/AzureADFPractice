@@ -1,0 +1,109 @@
+{
+	"name": "dynamic_src_dst",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "Select distinct src_file_name from load_config",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"dst_table_name": "Emp"
+						}
+					}
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_DelimitedText",
+						"type": "DatasetReference",
+						"parameters": {
+							"srcfilename": "Emp"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"dst_table_name": "Emp"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"datasource": {
+				"type": "string",
+				"defaultValue": "Emp"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-16T02:11:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

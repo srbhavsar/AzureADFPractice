@@ -1,0 +1,9 @@
+{
+	"name": "dfsbadf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f85e2797-fad8-4a89-9475-f10718af3aab",
+		"tenantId": "21c244d4-f2bf-43fb-a918-1fe39d367790"
+	}
+}

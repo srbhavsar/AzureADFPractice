@@ -1,0 +1,12 @@
+{
+	"name": "lnk_Snowflake",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Snowflake",
+		"typeProperties": {
+			"connectionString": "jdbc:snowflake://ix71800.east-us-2.azure.snowflakecomputing.com/?user=sbadmin&db=TESTDB&warehouse=TestWareHouse",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEI3NjM4Q0M3LTk5QkEtNDY4RS1BNUZGLTU5NkMwMjg3MTg3Ml9lNzU1YTVlMi02M2IxLTQxNzItOWI0Ni1mMTZmZmQzOGIwNjgiDQp9"
+		}
+	}
+}
